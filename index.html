@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Ferdmusics Website</title>
-<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/audioplayer.css">
-    <script scr="js/audioplayer.js"></script>
-
+    <link rel="stylesheet" href="css/dropdown.css">
+    <script src="js/audioplayer.js"></script>
 </head>
 <body>
 <div class="Farbverlauf">
-    <div class="navbar">
+    <div class="navbar" id="navbar">
         <a href="index.html">Home</a>
         <a href="music.html">Music</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
+        <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">&#9776;</a>
     </div>
 
     <h1>FERDMUSICS WEBSITE</h1>
@@ -30,15 +31,22 @@
                 I am using Cubase 12 to produce my music. <br>
                 I am composing orchestral music and sometimes a little bit of rock. <br>
             </p>
-
-
+        </div>
+        <div class="footer">
+            <p>© 2022 by Ferdmusic</p>
+        </div>
     </div>
-
-
-
-</div>
 </div>
 
-
+<script>
+    function toggleMenu() {
+        var x = document.getElementById("navbar");
+        if (x.className === "navbar") {
+            x.className += " responsive";
+        } else {
+            x.className = "navbar";
+        }
+    }
+</script>
 </body>
 </html>
