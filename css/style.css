@@ -1,2 +1,48 @@
 
-body {background-color: black;}
+body {
+    background-color: #1a1a1a;
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: white;
+    align-content: center;
+}
+
+.Ueberschrift2 {
+    color: white;
+    text-align: left;
+    align-content: center;
+}
+
+.Farbverlauf {
+    background: linear-gradient(to bottom, black, #1a1a1a)
+}
+
+.navbar {
+    background-color: black;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    color: white;
+    box-shadow: white;
+
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
