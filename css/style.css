@@ -7,13 +7,13 @@ body {
 
 h1 {
     color: white;
-    font-size: 5vw; /* 5% der Viewport-Breite */
+    font-size: 5vh; /* 5% der Viewport-Höhe */
 }
 
 .Ueberschrift2 {
     color: white;
     text-align: left;
-    font-size: 3vw; /* 3% der Viewport-Breite */
+    font-size: 3vh; /* 3% der Viewport-Höhe */
 }
 
 .Farbverlauf {
@@ -29,14 +29,16 @@ h1 {
     color: white;
     box-shadow: white;
     z-index: 1000; /* Beispielwert für die Z-Index-Einstellung */
+    margin-bottom: 20px; /* Abstand unterhalb der Navbar */
 }
+
 
 .navbar a {
     color: white;
     text-align: center;
-    padding: 1.5vw 2vw; /* Anpassen der Polsterung an die Viewport-Größe */
+    padding: 2vh 2vw; /* Anpassen der Polsterung an die Viewport-Größe */
     text-decoration: none;
-    font-size: 2vw; /* 2% der Viewport-Breite */
+    font-size: 2vh; /* 2% der Viewport-Höhe */
 }
 
 .navbar a:hover {
@@ -59,6 +61,7 @@ h1 {
         display: block;
         width: 100%;
         text-align: left;
+        font-size: 3vh; /* 3% der Viewport-Höhe */
     }
 
     .navbar a.right {
@@ -74,9 +77,9 @@ h1 {
 .topnav a {
     color: #f2f2f2;
     text-align: center;
-    padding: 1.5vw 2vw; /* Anpassen der Polsterung an die Viewport-Größe */
+    padding: 2vh 2vw; /* Anpassen der Polsterung an die Viewport-Größe */
     text-decoration: none;
-    font-size: 2vw; /* 2% der Viewport-Breite */
+    font-size: 2vh; /* 2% der Viewport-Höhe */
 }
 
 .topnav a:hover {
@@ -106,9 +109,13 @@ h1 {
 
 .footer {
     background-color: #f2f2f2;
-    padding: 1vw; /* Anpassen der Polsterung an die Viewport-Größe */
+    padding: 1vh; /* Anpassen der Polsterung an die Viewport-Größe */
 }
 
 .footer a {
     color: black;
+}
+
+p {
+    font-size: 2vh; /* 2% der Viewport-Höhe */
 }
