@@ -35,6 +35,10 @@
     width: 100%;
     height: 20px;
     background-color: #000; /* Schwarzer Hintergrund */
+    margin-top: 20px;
+    border-radius: 10px; /* Runde Ecken */
+    box-shadow: 0 0 10px 5px #000; /* Schwarzer Schatten */
+    margin-bottom: 10px;
 }
 
 .additional-progress-bar {
@@ -42,7 +46,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    background-color: #2E8B57; /* Dunkelgrüne Farbe für zusätzliche Fortschrittsleiste */
+    background-color:white;
     z-index: 0; /* Hintergrund setzen */
 }
 
@@ -52,6 +56,8 @@
     background-color: #FFD700; /* Goldene Farbe für Haupt-Fortschrittsleiste */
     width: 0;
     z-index: 1; /* Vordergrund setzen */
+    box-shadow: 0 0 10px 5px #FFD700; /* Goldener Schatten */
+
 }
 
 .tooltip {
@@ -88,6 +94,7 @@
 }
 
 .tracklist li:hover {
-    background-color: #2E8B57; /* Dunkelgrüne Farbe beim Hover */
+    background-color:  black /*Schwarze Hervorhebung*/;
     color: #FFD700; /* Goldene Schriftfarbe beim Hover */
+    border-radius: 5px;
 }

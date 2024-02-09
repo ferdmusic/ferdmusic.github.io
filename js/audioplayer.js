@@ -1,4 +1,5 @@
 var audio = document.getElementById("myAudio");
+audio.preload = "auto";
 var audioSource = document.getElementById("audioSource");
 var currentSongIndex = 0;
 var songs = [
@@ -73,32 +74,26 @@ function updateProgressBar() {
     timeDisplay.textContent = currentTime + " / " + duration;
 }
 
-function formatTime(time) {
-    var minutes = Math.floor(time / 60);
-    var seconds = Math.floor(time % 60);
-    if (seconds < 10) {
-        seconds = "0" + seconds;
-    }
-    return minutes + ":" + seconds;
-}
+// function formatTime(seconds) {
+//     var minutes = Math.floor(seconds / 60);
+//     seconds = Math.floor(seconds % 60);
+//     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+// }
 
-function seek(event) {
-    var progressBar = document.getElementById("progressBar");
-    var additionalProgressBar = document.getElementById("additionalProgressBar");
-    var percent = event.offsetX / progressBar.offsetWidth;
+
+function seek(e) {
+    var progressBar = document.querySelector('.progress-container');
+    var rect = progressBar.getBoundingClientRect();
+    var x = e.clientX - rect.left; // x position within the element.
+    var width = rect.right - rect.left; // width of the element.
+    var percent = x / width;
     audio.currentTime = percent * audio.duration;
-    updateProgressBar(); // Update Fortschrittsleiste nach dem Springen
-
-    var tooltip = document.getElementById("tooltip");
-    var time = formatTime(percent * audio.duration);
-    tooltip.textContent = time;
-    tooltip.style.left = event.offsetX + "px";
-
-    additionalProgressBar.style.width = event.offsetX + "px"; // Aktualisiere die Breite der zusätzlichen Fortschrittsleiste
+    updateProgressBar();
 }
+
 
 function showTooltip(event) {
-    var progressBar = document.getElementById("progressBar");
+    var progressBar = document.querySelector('.progress-container');
     var additionalProgressBar = document.getElementById("additionalProgressBar");
     var tooltip = document.getElementById("tooltip");
     var percent = event.offsetX / progressBar.offsetWidth;
@@ -118,3 +113,29 @@ function hideTooltip() {
     var tooltip = document.getElementById("tooltip");
     tooltip.style.display = "none";
 }
+
+function formatTime(seconds) {
+    var minutes = Math.floor(seconds / 60);
+    seconds = Math.floor(seconds % 60);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+
+
+// Fügen Sie dem additionalProgressBar das mouseleave-Event hinzu
+// Fügen Sie dem progressBar das mouseenter- und mouseleave-Event hinzu
+progress-container.addEventListener("mouseenter", showAdditionalProgressBar);
+progress-container.addEventListener("mouseleave", hideAdditionalProgressBar);
+
+// Neue Funktion, um den zusätzlichen Fortschrittsbalken anzuzeigen
+function showAdditionalProgressBar() {
+    var additionalProgressBar = document.getElementById("additionalProgressBar");
+    additionalProgressBar.style.display = "block";
+}
+
+// Neue Funktion, um den zusätzlichen Fortschrittsbalken zu verbergen
+function hideAdditionalProgressBar() {
+    var additionalProgressBar = document.getElementById("additionalProgressBar");
+    additionalProgressBar.style.display = "none";
+}
+
+
