@@ -9,11 +9,11 @@
     background-color: #000;
     border: 2px solid #FFD700; /* Goldene Umrandung */
     color: #FFD700; /* Goldene Schriftfarbe */
-    padding: 10px 20px;
+    padding: 2vh 2vw; /* Anpassen der Polsterung an die Viewport-Größe */
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 2vh; /* 2% der Viewport-Höhe */
     margin: 4px 2px;
     cursor: pointer;
 }
@@ -33,31 +33,53 @@
 .progress-container {
     position: relative; /* Position relativ für absolute Positionierung der Zusatz-Fortschrittsleiste */
     width: 100%;
-    height: 20px;
+    height: 3vh; /* 3% der Viewport-Höhe */
     background-color: #000; /* Schwarzer Hintergrund */
     margin-top: 20px;
     border-radius: 10px; /* Runde Ecken */
     box-shadow: 0 0 10px 5px #000; /* Schwarzer Schatten */
     margin-bottom: 10px;
+    //overflow: auto; /* Scrollbalken anzeigen, wenn die Fortschrittsleiste zu lang ist */
 }
 
 .additional-progress-bar {
-    position: absolute; /* Position absolut, um hinter der normalen Fortschrittsleiste zu liegen */
+    position: absolute;
     top: 0;
     left: 0;
     height: 100%;
-    background-color:white;
-    z-index: 0; /* Hintergrund setzen */
+    background-color: white;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; /* Übergangsanimation für Opazität hinzufügen */
+    border-radius: 10px;
+    /*box-shadow: 5px 0 10px 5px white;*/ /* Nur Schatten nach rechts */
 }
 
-.progress-bar {
-    position: relative; /* Position relativ für absolute Positionierung der Tooltip */
-    height: 100%;
-    background-color: #FFD700; /* Goldene Farbe für Haupt-Fortschrittsleiste */
-    width: 0;
-    z-index: 1; /* Vordergrund setzen */
-    box-shadow: 0 0 10px 5px #FFD700; /* Goldener Schatten */
 
+.progress-bar {
+    position: relative;
+    height: 100%;
+    background-color: #FFD700;
+    width: 0;
+    z-index: 1;
+    /*box-shadow: 0 0 10px 5px #FFD700;*/
+    /*add a circle to the end*/
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    width: 3vh; /* 3% der Viewport-Höhe */
+    height: 3vh; /* 3% der Viewport-Höhe */
+    border-radius: 50%; /* Kreisform */
+    background-color: white; /* Farbe des Kreises */
+    top: 50%; /* Zentrieren des Kreises vertikal */
+    left: calc(100% - 1.5vh); /* Positionieren des Kreises am Ende der Fortschrittsleiste */
+    transform: translate(-50%, -50%); /* Zentrieren des Kreises horizontal und vertikal */
+    box-shadow: 0 0 0 2px black; /* Hier wird die Outline definiert */
+    z-index: 2; /* Stelle sicher, dass der Kreis über der Fortschrittsleiste liegt */
 }
 
 .tooltip {
@@ -67,15 +89,17 @@
     color: white;
     padding: 5px;
     border-radius: 5px;
-    font-size: 12px;
-    bottom: 100%; /* unten positionieren */
-    left: 0;
+    font-size: 2vh; /* 2% der Viewport-Höhe */
+    bottom: calc(100% + 5px); /* positionieren unterhalb des Fortschrittsleistencontainers */
+    left: 50%;
     transform: translateX(-50%); /* zentrieren */
+    z-index: 999; /* Stellen Sie sicher, dass das Tooltip über anderen Elementen liegt */
 }
 
+/* Standard-Stile für die Tracklist */
 .tracklist {
-    margin-top: 20px;
-    text-align: center;
+    font-size: 3vh; /* Beispiel: 3% der Viewport-Höhe */
+    margin-top: 10px; /* Beispiel: Reduzieren Sie den oberen Abstand */
 }
 
 .tracklist ol {
@@ -94,7 +118,62 @@
 }
 
 .tracklist li:hover {
-    background-color:  black /*Schwarze Hervorhebung*/;
+    background-color: black /*Schwarze Hervorhebung*/;
     color: #FFD700; /* Goldene Schriftfarbe beim Hover */
     border-radius: 5px;
+}
+
+#timeDisplay {
+    font-size: 2vh; /* 2% der Viewport-Höhe */
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+
+/* Media Queries für Responsive Design */
+@media screen and (max-width: 768px) {
+    .tracklist {
+        /* Anpassungen für kleinere Bildschirme */
+        font-size: 3vh; /* Beispiel: 3% der Viewport-Höhe */
+        margin-top: 10px; /* Beispiel: Reduzieren Sie den oberen Abstand */
+    }
+
+    .tracklist li {
+        /* Weitere Anpassungen für kleinere Bildschirme */
+        padding: 2vh 4vw; /* Beispiel: 2% der Viewport-Höhe für oben/unten, 4% der Viewport-Breite für links/rechts */
+    }
+
+    .audio-controls button {
+        font-size: 3vh; /* 3% der Viewport-Höhe */
+        padding: 2vh 4vw; /* Anpassen der Polsterung an die Viewport-Größe */
+    }
+
+    .progress-container {
+        height: 5vh; /* 5% der Viewport-Höhe */
+        margin-top: 30px;
+        align-content: center;
+    }
+
+    .additional-progress-bar {
+        border-radius: 15px;
+        /*box-shadow: 5px 0 10px 5px white;*/ /* Nur Schatten nach rechts */
+    }
+
+    .progress-bar {
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+
+    .progress-bar::after {
+        width: 5vh; /* 5% der Viewport-Höhe */
+        height: 5vh; /* 5% der Viewport-Höhe */
+        left: calc(100% - 2.5vh); /* Positionieren des Kreises am Ende der Fortschrittsleiste */
+        box-shadow: 0 0 0 3px black;
+    }
+
+    #timeDisplay {
+        font-size: 2vh; /* 3% der Viewport-Höhe */
+    }
 }

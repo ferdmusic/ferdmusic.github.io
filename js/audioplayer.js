@@ -72,14 +72,13 @@ function updateProgressBar() {
     var currentTime = formatTime(audio.currentTime);
     var duration = formatTime(audio.duration);
     timeDisplay.textContent = currentTime + " / " + duration;
+
+    // Aktualisiere die Position der Zeitanzeige
+    var progressContainer = document.querySelector('.progress-container');
+    var rect = progressContainer.getBoundingClientRect();
+    var timeDisplayPosition = (percentage * rect.width) / 100;
+    timeDisplay.style.left = rect.left + timeDisplayPosition + "px";
 }
-
-// function formatTime(seconds) {
-//     var minutes = Math.floor(seconds / 60);
-//     seconds = Math.floor(seconds % 60);
-//     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-// }
-
 
 function seek(e) {
     var progressBar = document.querySelector('.progress-container');
@@ -90,7 +89,6 @@ function seek(e) {
     audio.currentTime = percent * audio.duration;
     updateProgressBar();
 }
-
 
 function showTooltip(event) {
     var progressBar = document.querySelector('.progress-container');
@@ -120,22 +118,47 @@ function formatTime(seconds) {
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
 
-
 // Fügen Sie dem additionalProgressBar das mouseleave-Event hinzu
 // Fügen Sie dem progressBar das mouseenter- und mouseleave-Event hinzu
-progress-container.addEventListener("mouseenter", showAdditionalProgressBar);
-progress-container.addEventListener("mouseleave", hideAdditionalProgressBar);
+var progressContainer = document.querySelector('.progress-container');
+progressContainer.addEventListener("mouseenter", showAdditionalProgressBar);
+progressContainer.addEventListener("mouseleave", hideAdditionalProgressBar);
 
 // Neue Funktion, um den zusätzlichen Fortschrittsbalken anzuzeigen
 function showAdditionalProgressBar() {
     var additionalProgressBar = document.getElementById("additionalProgressBar");
-    additionalProgressBar.style.display = "block";
+    additionalProgressBar.style.opacity = 1; // Stelle sicher, dass der Fortschrittsbalken sichtbar ist
 }
 
 // Neue Funktion, um den zusätzlichen Fortschrittsbalken zu verbergen
 function hideAdditionalProgressBar() {
     var additionalProgressBar = document.getElementById("additionalProgressBar");
-    additionalProgressBar.style.display = "none";
+    additionalProgressBar.style.opacity = 0; // Stelle sicher, dass der Fortschrittsbalken unsichtbar ist
+}
+
+var isDragging = false;
+
+function seekStart(event) {
+    isDragging = true;
+    seek(event);
+}
+
+function seekEnd() {
+    if (isDragging) {
+        isDragging = false;
+        audio.play(); // Fortsetzen der Wiedergabe, wenn das Ziehen abgeschlossen ist
+    }
+}
+
+function seekDrag(event) {
+    if (isDragging) {
+        seek(event);
+    }
 }
 
 
+
+progressContainer.addEventListener("mousedown", seekStart);
+progressContainer.addEventListener("mousemove", seekDrag);
+progressContainer.addEventListener("mouseup", seekEnd);
+progressContainer.addEventListener("mouseleave", seekEnd);
