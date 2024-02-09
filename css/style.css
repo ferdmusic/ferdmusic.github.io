@@ -4,6 +4,7 @@ body {
     text-align: center;
     font-family: 'JetBrains Mono', monospace;
 
+
 }
 
 @font-face {
@@ -42,7 +43,7 @@ h1 {
 
 .Ueberschrift2 {
     color: white;
-    text-align: left;
+    text-align: center;
     font-size: 3vh; /* 3% der Viewport-Höhe */
 }
 
@@ -171,3 +172,9 @@ a {
     border-radius: 5px;
 
 }
+
+.text {
+    max-width: 1600px; /* Maximale Breite auf 1600 Pixel setzen */
+    margin: 0 auto; /* Zentrieren des Inhalts horizontal */
+}
+

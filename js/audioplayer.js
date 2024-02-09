@@ -1,250 +1,120 @@
-$(function () {
-    var playerTrack = $("#player-track"),
-        bgArtwork = $("#bg-artwork"),
-        bgArtworkUrl,
-        albumName = $("#album-name"),
-        trackName = $("#track-name"),
-        albumArt = $("#album-art"),
-        sArea = $("#s-area"),
-        seekBar = $("#seek-bar"),
-        trackTime = $("#track-time"),
-        insTime = $("#ins-time"),
-        sHover = $("#s-hover"),
-        playPauseButton = $("#play-pause-button"),
-        i = playPauseButton.find("i"),
-        tProgress = $("#current-time"),
-        tTime = $("#track-length"),
-        seekT,
-        seekLoc,
-        seekBarPos,
-        cM,
-        ctMinutes,
-        ctSeconds,
-        curMinutes,
-        curSeconds,
-        durMinutes,
-        durSeconds,
-        playProgress,
-        bTime,
-        nTime = 0,
-        buffInterval = null,
-        tFlag = false,
-        albums = [
-            "Dawn",
-            "Me & You",
-            "Electro Boy",
-            "Home",
-            "Proxy (Original Mix)"
-        ],
-        trackNames = [
-            "Skylike - Dawn",
-            "Alex Skrindo - Me & You",
-            "Kaaze - Electro Boy",
-            "Jordan Schor - Home",
-            "Martin Garrix - Proxy"
-        ],
-        albumArtworks = ["_1", "_2", "_3", "_4", "_5"],
-        trackUrl = [
-            "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/2.mp3",
-            "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3",
-            "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3",
-            "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/4.mp3",
-            "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/5.mp3"
-        ],
-        playPreviousTrackButton = $("#play-previous"),
-        playNextTrackButton = $("#play-next"),
-        currIndex = -1;
+var audio = document.getElementById("myAudio");
+var audioSource = document.getElementById("audioSource");
+var currentSongIndex = 0;
+var songs = [
+    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/2.mp3",
+    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3",
+    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3",
+    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/4.mp3",
+    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/5.mp3"
+];
 
-    function playPause() {
-        setTimeout(function () {
-            if (audio.paused) {
-                playerTrack.addClass("active");
-                albumArt.addClass("active");
-                checkBuffering();
-                i.attr("class", "fas fa-pause");
-                audio.play();
-            } else {
-                playerTrack.removeClass("active");
-                albumArt.removeClass("active");
-                clearInterval(buffInterval);
-                albumArt.removeClass("buffering");
-                i.attr("class", "fas fa-play");
-                audio.pause();
-            }
-        }, 300);
+function toggleMenu() {
+    var x = document.getElementById("navbar");
+    if (x.className === "navbar") {
+        x.className += " responsive";
+    } else {
+        x.className = "navbar";
     }
+}
 
-    function showHover(event) {
-        seekBarPos = sArea.offset();
-        seekT = event.clientX - seekBarPos.left;
-        seekLoc = audio.duration * (seekT / sArea.outerWidth());
+function playAudio() {
+    audio.play();
+}
 
-        sHover.width(seekT);
+function pauseAudio() {
+    audio.pause();
+}
 
-        cM = seekLoc / 60;
+function previousSong() {
+    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+    playCurrentSong();
+}
 
-        ctMinutes = Math.floor(cM);
-        ctSeconds = Math.floor(seekLoc - ctMinutes * 60);
+function nextSong() {
+    currentSongIndex = (currentSongIndex + 1) % songs.length;
+    playCurrentSong();
+}
 
-        if (ctMinutes < 0 || ctSeconds < 0) return;
+function playSong(index) {
+    currentSongIndex = index;
+    playCurrentSong();
+}
 
-        if (ctMinutes < 0 || ctSeconds < 0) return;
+function playCurrentSong() {
+    audioSource.src = songs[currentSongIndex];
+    audio.load();
+    audio.play();
+    highlightCurrentSong();
+}
 
-        if (ctMinutes < 10) ctMinutes = "0" + ctMinutes;
-        if (ctSeconds < 10) ctSeconds = "0" + ctSeconds;
-
-        if (isNaN(ctMinutes) || isNaN(ctSeconds)) insTime.text("--:--");
-        else insTime.text(ctMinutes + ":" + ctSeconds);
-
-        insTime.css({ left: seekT, "margin-left": "-21px" }).fadeIn(0);
-    }
-
-    function hideHover() {
-        sHover.width(0);
-        insTime.text("00:00").css({ left: "0px", "margin-left": "0px" }).fadeOut(0);
-    }
-
-    function playFromClickedPos() {
-        audio.currentTime = seekLoc;
-        seekBar.width(seekT);
-        hideHover();
-    }
-
-    function updateCurrTime() {
-        nTime = new Date();
-        nTime = nTime.getTime();
-
-        if (!tFlag) {
-            tFlag = true;
-            trackTime.addClass("active");
-        }
-
-        curMinutes = Math.floor(audio.currentTime / 60);
-        curSeconds = Math.floor(audio.currentTime - curMinutes * 60);
-
-        durMinutes = Math.floor(audio.duration / 60);
-        durSeconds = Math.floor(audio.duration - durMinutes * 60);
-
-        playProgress = (audio.currentTime / audio.duration) * 100;
-
-        if (curMinutes < 10) curMinutes = "0" + curMinutes;
-        if (curSeconds < 10) curSeconds = "0" + curSeconds;
-
-        if (durMinutes < 10) durMinutes = "0" + durMinutes;
-        if (durSeconds < 10) durSeconds = "0" + durSeconds;
-
-        if (isNaN(curMinutes) || isNaN(curSeconds)) tProgress.text("00:00");
-        else tProgress.text(curMinutes + ":" + curSeconds);
-
-        if (isNaN(durMinutes) || isNaN(durSeconds)) tTime.text("00:00");
-        else tTime.text(durMinutes + ":" + durSeconds);
-
-        if (
-            isNaN(curMinutes) ||
-            isNaN(curSeconds) ||
-            isNaN(durMinutes) ||
-            isNaN(durSeconds)
-        )
-            trackTime.removeClass("active");
-        else trackTime.addClass("active");
-
-        seekBar.width(playProgress + "%");
-
-        if (playProgress == 100) {
-            i.attr("class", "fa fa-play");
-            seekBar.width(0);
-            tProgress.text("00:00");
-            albumArt.removeClass("buffering").removeClass("active");
-            clearInterval(buffInterval);
-        }
-    }
-
-    function checkBuffering() {
-        clearInterval(buffInterval);
-        buffInterval = setInterval(function () {
-            if (nTime == 0 || bTime - nTime > 1000) albumArt.addClass("buffering");
-            else albumArt.removeClass("buffering");
-
-            bTime = new Date();
-            bTime = bTime.getTime();
-        }, 100);
-    }
-
-    function selectTrack(flag) {
-        if (flag == 0 || flag == 1) ++currIndex;
-        else --currIndex;
-
-        if (currIndex > -1 && currIndex < albumArtworks.length) {
-            if (flag == 0) i.attr("class", "fa fa-play");
-            else {
-                albumArt.removeClass("buffering");
-                i.attr("class", "fa fa-pause");
-            }
-
-            seekBar.width(0);
-            trackTime.removeClass("active");
-            tProgress.text("00:00");
-            tTime.text("00:00");
-
-            currAlbum = albums[currIndex];
-            currTrackName = trackNames[currIndex];
-            currArtwork = albumArtworks[currIndex];
-
-            audio.src = trackUrl[currIndex];
-
-            nTime = 0;
-            bTime = new Date();
-            bTime = bTime.getTime();
-
-            if (flag != 0) {
-                audio.play();
-                playerTrack.addClass("active");
-                albumArt.addClass("active");
-
-                clearInterval(buffInterval);
-                checkBuffering();
-            }
-
-            albumName.text(currAlbum);
-            trackName.text(currTrackName);
-            albumArt.find("img.active").removeClass("active");
-            $("#" + currArtwork).addClass("active");
-
-            bgArtworkUrl = $("#" + currArtwork).attr("src");
-
-            bgArtwork.css({ "background-image": "url(" + bgArtworkUrl + ")" });
+function highlightCurrentSong() {
+    var tracklistItems = document.querySelectorAll("#tracklist li");
+    tracklistItems.forEach(function(item, index) {
+        if (index === currentSongIndex) {
+            item.classList.add("highlight");
         } else {
-            if (flag == 0 || flag == 1) --currIndex;
-            else ++currIndex;
+            item.classList.remove("highlight");
         }
+    });
+}
+
+function updateProgressBar() {
+    var progressBar = document.getElementById("progressBar");
+    var additionalProgressBar = document.getElementById("additionalProgressBar");
+    var timeDisplay = document.getElementById("timeDisplay");
+
+    var percentage = (audio.currentTime / audio.duration) * 100;
+    progressBar.style.width = percentage + "%";
+    additionalProgressBar.style.width = percentage + "%";
+
+    var currentTime = formatTime(audio.currentTime);
+    var duration = formatTime(audio.duration);
+    timeDisplay.textContent = currentTime + " / " + duration;
+}
+
+function formatTime(time) {
+    var minutes = Math.floor(time / 60);
+    var seconds = Math.floor(time % 60);
+    if (seconds < 10) {
+        seconds = "0" + seconds;
     }
+    return minutes + ":" + seconds;
+}
 
-    function initPlayer() {
-        audio = new Audio();
+function seek(event) {
+    var progressBar = document.getElementById("progressBar");
+    var additionalProgressBar = document.getElementById("additionalProgressBar");
+    var percent = event.offsetX / progressBar.offsetWidth;
+    audio.currentTime = percent * audio.duration;
+    updateProgressBar(); // Update Fortschrittsleiste nach dem Springen
 
-        selectTrack(0);
+    var tooltip = document.getElementById("tooltip");
+    var time = formatTime(percent * audio.duration);
+    tooltip.textContent = time;
+    tooltip.style.left = event.offsetX + "px";
 
-        audio.loop = false;
+    additionalProgressBar.style.width = event.offsetX + "px"; // Aktualisiere die Breite der zusätzlichen Fortschrittsleiste
+}
 
-        playPauseButton.on("click", playPause);
+function showTooltip(event) {
+    var progressBar = document.getElementById("progressBar");
+    var additionalProgressBar = document.getElementById("additionalProgressBar");
+    var tooltip = document.getElementById("tooltip");
+    var percent = event.offsetX / progressBar.offsetWidth;
+    var time = formatTime(percent * audio.duration);
+    tooltip.textContent = time;
+    tooltip.style.display = "block";
 
-        sArea.mousemove(function (event) {
-            showHover(event);
-        });
+    // Setze die Breite der zusätzlichen Fortschrittsleiste entsprechend der Mausposition
+    additionalProgressBar.style.width = event.offsetX + "px";
 
-        sArea.mouseout(hideHover);
+    // Positionierung des Tooltips
+    tooltip.style.left = event.pageX - tooltip.offsetWidth / 2 + "px";
+    //tooltip.style.top = progressBar.offsetTop - tooltip.offsetHeight - 10 + "px"; // 10px Abstand
+}
 
-        sArea.on("click", playFromClickedPos);
-
-        $(audio).on("timeupdate", updateCurrTime);
-
-        playPreviousTrackButton.on("click", function () {
-            selectTrack(-1);
-        });
-        playNextTrackButton.on("click", function () {
-            selectTrack(1);
-        });
-    }
-
-    initPlayer();
-});
+function hideTooltip() {
+    var tooltip = document.getElementById("tooltip");
+    tooltip.style.display = "none";
+}

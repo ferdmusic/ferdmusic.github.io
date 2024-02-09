@@ -2,9 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ferdmusics Website</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/audioplayer.css">
+    <link rel="stylesheet" href="css/dropdown.css">
 </head>
 <body>
+<div class="Farbverlauf">
+    <div class="navbar" id="navbar">
+        <a href="index.html">Home</a>
+        <a href="music.html">Music</a>
+        <a href="about.html">About</a>
+        <a href="mailto:ferdmusic.fb@gmail.com">Contact</a>
+        <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">&#9776;</a>
+    </div>
 
+    <h1>FERDMUSICS WEBSITE</h1>
+    <div class="Welcome">
+        <div class="Ueberschrift2">
+            <h2>My Music</h2>
+        </div>
+        <div class="Text">
+            <div class="audio-controls">
+                <button onclick="previousSong()">Previous</button>
+                <button onclick="playAudio()">Play</button>
+                <button onclick="pauseAudio()">Pause</button>
+                <button onclick="nextSong()">Next</button>
+            </div>
+            <div class="progress-container" onclick="seek(event)" onmousemove="showTooltip(event)" onmouseleave="hideTooltip()">
+                <div class="additional-progress-bar" id="additionalProgressBar"></div>
+                <div class="progress-bar" id="progressBar"></div>
+                <div class="tooltip" id="tooltip">0:00</div>
+            </div>
+
+            <div id="timeDisplay">0:00 / 0:00</div>
+            <audio id="myAudio" ontimeupdate="updateProgressBar()">
+                <source id="audioSource" src="" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <div class="tracklist">
+                <ol id="tracklist">
+                    <li onclick="playSong(0)">Song 1</li>
+                    <li onclick="playSong(1)">Song 2</li>
+                    <li onclick="playSong(2)">Song 3</li>
+                    <li onclick="playSong(3)">Song 4</li>
+                    <li onclick="playSong(4)">Song 5</li>
+                </ol>
+            </div>
+        </div>
+        <div class="footer">
+            <p>© 2024 by Ferdmusic</p>
+            <p><a href="imprint.html">Imprint</a> </p>
+        </div>
+    </div>
+</div>
+
+<script src="js/audioplayer.js"></script>
 </body>
 </html>
