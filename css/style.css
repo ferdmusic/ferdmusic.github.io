@@ -3,6 +3,7 @@ body {
     color: white;
     text-align: center;
     font-family: 'JetBrains Mono', monospace;
+    font-size: 2vh; /* 2% der Viewport-Höhe */
 
 
 }

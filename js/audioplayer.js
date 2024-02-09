@@ -3,7 +3,7 @@ audio.preload = "auto";
 var audioSource = document.getElementById("audioSource");
 var currentSongIndex = 0;
 var songs = [
-    "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/2.mp3",
+    "audiofiles/MusioSoundOff.ogg",
     "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3",
     "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3",
     "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/4.mp3",
