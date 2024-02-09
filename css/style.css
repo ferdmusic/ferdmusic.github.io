@@ -157,3 +157,17 @@ h1 {
 p {
     font-size: 2vh; /* 2% der Viewport-Höhe */
 }
+
+a {
+    color: white;
+
+}
+
+.glow-on-hover a:hover {
+
+    color: black;
+    box-shadow: 0 0 5px 5px #00ffff;
+    background-color: #00ffff;
+    border-radius: 5px;
+
+}
