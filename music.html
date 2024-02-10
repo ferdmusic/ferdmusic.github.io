@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/audioplayer.css">
     <link rel="stylesheet" href="css/dropdown.css">
+    <link rel="stylesheet" href="css/simple-line-icons.css">
 </head>
 <body>
 <div class="Farbverlauf">
@@ -24,11 +25,23 @@
         </div>
         <div class="Text">
             <div class="audio-controls">
-                <button onclick="previousSong()">Previous</button>
-                <button onclick="playAudio()">Play</button>
-                <button onclick="pauseAudio()">Pause</button>
-                <button onclick="nextSong()">Next</button>
+                <button class="previous" onclick="previousSong()"><span class="icon-control-start"></span> </button>
+                <button class="play-pause" onclick="togglePlayPause()"><span class="icon-control-play"></span></button>
+                <button class="next" onclick="nextSong()"><span class="icon-control-end"></span></button>
+                <!-- Volume-Button -->
+                <div class="volume-container">
+                    <input type="range" min="0" max="2" step="1" value="0" class="volume-slider" onchange="onVolumeChange(this.value)" onmouseleave="hideVolumeBar(event)">
+
+                    <button class="volume-button" onmouseover="showVolumeBar()" onmouseout="hideVolumeBar()">
+                        <span class="volume-icon-container">
+                            <span class="volume-icon icon-volume-2"></span>
+                        </span>
+                    </button>
+                </div>
+
+
             </div>
+
             <div class="progress-container" onclick="seek(event)" onmousemove="showTooltip(event)" onmouseleave="hideTooltip()">
                 <div class="additional-progress-bar" id="additionalProgressBar"></div>
                 <div class="progress-bar" id="progressBar"></div>
@@ -36,10 +49,13 @@
             </div>
 
             <div id="timeDisplay">0:00 / 0:00</div>
+
             <audio id="myAudio" ontimeupdate="updateProgressBar()">
                 <source id="audioSource" src="" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
+
+
             <div class="tracklist">
                 <ol id="tracklist">
                     <li onclick="playSong(0)">Musio Sound Off Submission</li>

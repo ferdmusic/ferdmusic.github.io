@@ -10,6 +10,90 @@ var songs = [
     "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/5.mp3"
 ];
 
+// JavaScript
+var volumeLevels = [
+    { level: 0, iconClass: 'icon-volume-off' },
+    { level: 1, iconClass: 'icon-volume-1' },
+    { level: 2, iconClass: 'icon-volume-2' }
+];
+var currentVolumeLevel = 1; // Index des aktuellen Lautstärkelevels
+
+function toggleVolume() {
+    currentVolumeLevel = (currentVolumeLevel + 1) % volumeLevels.length;
+    var volumeData = volumeLevels[currentVolumeLevel];
+    setVolume(volumeData.level);
+    updateVolumeIcon(volumeData.iconClass);
+    updateSliderValue(currentVolumeLevel);
+}
+
+function setVolume(volume) {
+    var audio = document.getElementById("myAudio");
+    audio.volume = volume / 2; // Wert von 0 bis 2 auf 0 bis 1 umrechnen
+    updateVolumeIcon(volume);
+}
+
+function updateVolumeIcon(iconClass) {
+    var volumeIconContainer = document.querySelector(".volume-icon-container");
+    var volumeIcon = volumeIconContainer.querySelector(".volume-icon");
+    volumeIcon.className = "volume-icon " + iconClass;
+}
+
+function updateSliderValue(value) {
+    var volumeSlider = document.querySelector(".volume-slider");
+    volumeSlider.value = value;
+}
+
+function showVolumeBar() {
+    var volumeSlider = document.querySelector(".volume-slider");
+    volumeSlider.style.opacity = 1;
+}
+
+function hideVolumeBar(event) {
+    var volumeSlider = document.querySelector(".volume-slider");
+    // Überprüfen, ob das Mausziel die Volume-Bar ist oder ein Kind der Volume-Bar
+    if (!volumeSlider.contains(event.relatedTarget)) {
+        // Wenn das Mausziel nicht die Volume-Bar ist, blende sie aus
+        volumeSlider.style.opacity = 0;
+    }
+}
+
+function onVolumeChange(value) {
+    setVolume(parseInt(value));
+    updateVolumeIcon(value);
+}
+
+
+
+
+
+
+function toggleMute() {
+    var audio = document.getElementById("myAudio");
+    if (audio.volume === 0) {
+        // Wenn der Ton stummgeschaltet ist, die Lautstärke auf den vorherigen Wert setzen
+        audio.volume = audio.dataset.previousVolume || 1;
+    } else {
+        // Wenn der Ton nicht stummgeschaltet ist, den aktuellen Lautstärkewert speichern und die Lautstärke auf 0 setzen
+        audio.dataset.previousVolume = audio.volume;
+        audio.volume = 0;
+    }
+
+    // Volume-Icon aktualisieren
+    var volumeIcon = document.querySelector(".volume-icon");
+    if (audio.volume === 0) {
+        volumeIcon.classList.remove("icon-volume-2", "icon-volume-1");
+        volumeIcon.classList.add("icon-volume-off");
+    } else if (audio.volume > 0 && audio.volume <= 0.5) {
+        volumeIcon.classList.remove("icon-volume-2", "icon-volume-off");
+        volumeIcon.classList.add("icon-volume-1");
+    } else {
+        volumeIcon.classList.remove("icon-volume-1", "icon-volume-off");
+        volumeIcon.classList.add("icon-volume-2");
+    }
+}
+
+
+
 function toggleMenu() {
     var x = document.getElementById("navbar");
     if (x.className === "navbar") {
@@ -19,12 +103,22 @@ function toggleMenu() {
     }
 }
 
-function playAudio() {
-    audio.play();
+function togglePlayPause() {
+    if (audio.paused) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
+    updatePlayPauseIcon();
 }
 
-function pauseAudio() {
-    audio.pause();
+function updatePlayPauseIcon() {
+    var playPauseButton = document.querySelector('.play-pause');
+    if (audio.paused) {
+        playPauseButton.innerHTML = '<span class="icon-control-play"></span>';
+    } else {
+        playPauseButton.innerHTML = '<span class="icon-control-pause"></span>';
+    }
 }
 
 function previousSong() {
@@ -47,6 +141,7 @@ function playCurrentSong() {
     audio.load();
     audio.play();
     highlightCurrentSong();
+    updatePlayPauseIcon();
 }
 
 function highlightCurrentSong() {
@@ -156,9 +251,12 @@ function seekDrag(event) {
     }
 }
 
-
-
 progressContainer.addEventListener("mousedown", seekStart);
 progressContainer.addEventListener("mousemove", seekDrag);
 progressContainer.addEventListener("mouseup", seekEnd);
 progressContainer.addEventListener("mouseleave", seekEnd);
+
+audio.addEventListener("timeupdate", function() {
+    updateProgressBar();
+    updatePlayPauseIcon();
+});

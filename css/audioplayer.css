@@ -1,3 +1,42 @@
+/* CSS für den Volume-Button */
+/* Ihre anderen CSS-Stile hier */
+
+.volume-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.volume-icon {
+    /* Stile für das Volume-Icon */
+    color: #FFD700; /* Goldene Farbe für das Volume-Icon */
+    font-size: 24px; /* Größe des Volume-Icons anpassen */
+    /* Weitere Stile für das Volume-Icon nach Bedarf */
+}
+.volume-bar.muted::-webkit-slider-thumb {
+    background-color: #FFD700; /* Goldene Farbe für den Slider-Thumb im stummgeschalteten Zustand */
+}
+
+.volume-container {
+    position: relative;
+    display: inline-block;
+}
+
+.volume-slider {
+    position: absolute;
+    top: -10px; /* Positionierung über dem Button */
+    left: 0;
+    opacity: 0; /* Anfangs unsichtbar */
+    transition: opacity 0.3s; /* Übergangsanimation */
+}
+
+.volume-button:hover + .volume-slider {
+    opacity: 1; /* Sichtbar, wenn der Button gehovert wird */
+}
+
+
+
 /* Audioplayer-Stile im Star Wars-Look */
 .audio-controls {
     display: flex;
@@ -16,18 +55,22 @@
     font-size: 2vh; /* 2% der Viewport-Höhe */
     margin: 4px 2px;
     cursor: pointer;
+    border-radius: 15px;
 }
 
 .audio-controls button:hover {
     background-color: #FFD700; /* Gold bei Hover */
     color: #000; /* Schwarze Schriftfarbe bei Hover */
     opacity: 0.8; /* Anpassung der Opazität */
+    /*fette schrift*/
+    font-weight: bold;
 }
 
 .audio-controls audio {
     width: 100%;
     margin-top: 10px;
 }
+
 
 /* Fortschrittsleisten-Stile im Star Wars-Look */
 .progress-container {
