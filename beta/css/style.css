@@ -21,6 +21,7 @@
         --github-border: #30363d;
         --github-link: #58a6ff;
         --github-accent: #58a6ff;
+        --github-button-text: #ffffff;
     }
 }
 
@@ -32,6 +33,7 @@
         --github-border: #30363d;
         --github-link: #58a6ff;
         --github-accent: #58a6ff;
+        --github-button-text: #ffffff;
     }
 }
 
@@ -48,6 +50,7 @@
         --standard-font-size: 1rem;
         --standard-line-height: 1.5;
         --github-accent: #0366d6;
+        --github-button-text: #ffffff;
     }
 
 }
@@ -133,7 +136,8 @@ button {
     padding: var(--standard-padding);
     border-radius: var(--standard-border-radius);
     background-color: var(--github-accent);
-    color: var(--github-link);
+    color: var(--github-button-text);
+    font-size: var(--standard-font-size);
 }
 
 #trail {
