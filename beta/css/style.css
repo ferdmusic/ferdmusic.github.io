@@ -52,7 +52,7 @@
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1500px) {
     :root {
         --standard-margin: 0.5rem;
         --standard-padding: 0.5rem;
@@ -61,7 +61,6 @@
         --standard-line-height: 1.25;
         --flex-direction-landing: column;
     }
-
     .landing-img {
         display: none;
     }
@@ -76,6 +75,8 @@
         --standard-line-height: 1.375;
 
     }
+
+
 }
 
 @media (min-width: 1201px) {
