@@ -9,18 +9,32 @@
     <meta name="author" content="Ferdmusic">
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/topnav.css">
+    <link rel="stylesheet" href="css/variables.css">
     <script src="js/trail.js"></script>
+    <script src="js/navbar.js"></script>
 
 </head>
 <body>
+
+<div class="topnav" id="myTopnav">
+    <a href="#home" class="active">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
 
 
 <div class="landing-container">
     <div class="landing-text">
         <h1>Ferdmusic</h1>
         <p>A person from Germany who likes to do composing and post-production!</p>
-        <button class="landing-button">Learn more</button>
-        <button class="landing-button">My Work</button>
+        <a href="about.html"><button class="landing-button">About Me</button></a>
+        <a href="portfolio.html"><button class="landing-button">My work</button></a>
     </div>
     <div class="landing-img">
         <img src="img/landingpiano(Mittel).JPG" alt="A piano">
