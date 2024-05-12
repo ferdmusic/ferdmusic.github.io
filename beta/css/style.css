@@ -61,6 +61,10 @@
         --standard-line-height: 1.25;
         --flex-direction-landing: column;
     }
+
+    .landing-img {
+        display: none;
+    }
 }
 
 @media (min-width: 601px) and (max-width: 1200px) {
@@ -129,4 +133,15 @@ button {
     border-radius: var(--standard-border-radius);
     background-color: var(--github-accent);
     color: var(--github-link);
+}
+
+#trail {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    transition: all 0.1s ease-in-out;
 }
