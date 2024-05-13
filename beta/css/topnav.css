@@ -2,6 +2,8 @@
 .topnav {
     background-color: var(--github-background-dark);
     overflow: hidden;
+    border-size:2px;
+    border-color:var(--github-accent-color);
 }
 
 /* Style the links inside the navigation bar */
