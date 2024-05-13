@@ -3,7 +3,7 @@
     background-color: var(--github-background-dark);
     overflow: hidden;
     border-size:2px;
-    border-color:var(--github-accent-color);
+    border-color:var(--github-accent);
 }
 
 /* Style the links inside the navigation bar */
