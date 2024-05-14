@@ -1,10 +1,10 @@
 /* Main styles */
 :root {
-  --primary-color: rgb(24, 24, 24);
-  --primary-background-color: rgb(221, 221, 221);
-  --secondary-color: rgb(75, 75, 75);
+  --primary-color: var(--github-accent);
+  --primary-background-color: var(--github-background);
+  --secondary-color: var(--github-background-dark);
   --secondary-background-color: rgb(255, 255, 255);
-  --highlight-color: rgb(255, 85, 1);
+  --highlight-color: var(--github-text);
   --box-shadow-color: rgb(201, 201, 201);
   --disabled-button-color: rgb(175, 175, 175);
   --border-radius: 1rem;

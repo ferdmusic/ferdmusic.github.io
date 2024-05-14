@@ -130,3 +130,51 @@ wavesurfer.on('audioprocess', () => {
 wavesurfer.on('finish', () => {
   playButtonIcon.src = 'assets/icons/play.svg';
 });
+
+// Schritt 1: Erstellen Sie eine Liste von Songs
+let songs = [
+  { src: 'path/to/song1.mp3', title: 'Song 1', artist: 'Artist 1' },
+  { src: 'path/to/song2.mp3', title: 'Song 2', artist: 'Artist 2' },
+  // Fügen Sie hier weitere Songs hinzu...
+];
+
+// Schritt 2: Erstellen Sie für jeden Song einen Player
+let container = document.querySelector('.container'); // Der Hauptcontainer, der alle Player enthält
+
+songs.forEach((song, index) => {
+  // Erstellen Sie ein neues div-Element für den Player
+  let player = document.createElement('div');
+  player.className = 'audio-player';
+  player.id = 'player' + index; // Geben Sie jedem Player eine eindeutige ID
+
+  // Fügen Sie den HTML-Inhalt zum Player hinzu
+  player.innerHTML = `
+        <button id="playButton${index}" class="play-button">
+            <img id="playButtonIcon${index}" class="play-button-icon" src="assets/icons/play.svg" alt="Play Button" />
+        </button>
+        <div class="player-body">
+            <p class="title">${song.artist} - ${song.title}</p>
+            <div id="waveform${index}" class="waveform"></div>
+            <!-- Fügen Sie hier weitere Elemente hinzu, wie Sie es benötigen -->
+        </div>
+    `;
+
+  // Fügen Sie den Player zum Hauptcontainer hinzu
+  container.appendChild(player);
+});
+
+// Schritt 3: Initialisieren Sie wavesurfer.js für jeden Player
+songs.forEach((song, index) => {
+  let wavesurfer = WaveSurfer.create({
+    container: '#waveform' + index,
+    waveColor: 'violet',
+    progressColor: 'purple'
+  });
+
+  wavesurfer.load(song.src);
+
+  let playButton = document.querySelector('#playButton' + index);
+  playButton.addEventListener('click', function () {
+    wavesurfer.playPause();
+  });
+});
