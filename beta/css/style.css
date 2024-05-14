@@ -22,7 +22,7 @@ a {
     flex-direction: var(--flex-direction-landing);
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: auto;
     padding: 10vh;
 }
 
@@ -31,12 +31,13 @@ a {
     margin-bottom: 16px;
 }
 
-.landing.landing-img {
+.landing-img {
     border-radius: 20px;
     margin-bottom: 16px;
     max-width: 100%;
     height: auto;
     border-color: var(--github-border);
+    overflow: auto;
 }
 
 button {
@@ -45,6 +46,7 @@ button {
     background-color: var(--github-accent);
     color: var(--github-button-text);
     font-size: var(--standard-font-size);
+
 }
 
 #trail {
@@ -56,4 +58,10 @@ button {
     pointer-events: none;
     mix-blend-mode: overlay;
     transition: all 0.1s ease-in-out;
+}
+
+img {
+    width: 100%; /* or any custom size */
+    height: 100%;
+    object-fit: contain;
 }
