@@ -28,12 +28,12 @@ a {
 
 .landing-text {
     font-size: 2rem;
-    margin-bottom: 10vh;
+    margin-bottom: 16px;
 }
 
 .landing.landing-img {
     border-radius: 20px;
-    margin-bottom: 10vh;
+    margin-bottom: 16px;
     max-width: 100%;
     height: auto;
     border-color: var(--github-border);
