@@ -24,11 +24,14 @@ a {
     justify-content: center;
     height: auto;
     padding: 10vh;
+    gap: 2rem;
+    flex: 1;
 }
 
 .landing-text {
     font-size: 2rem;
     margin-bottom: 16px;
+    height: 100%;
 }
 
 .landing-img {
@@ -45,7 +48,7 @@ button {
     border-radius: var(--standard-border-radius);
     background-color: var(--github-accent);
     color: var(--github-button-text);
-    font-size: var(--standard-font-size);
+    font-size: 1.5rem;
 
 }
 

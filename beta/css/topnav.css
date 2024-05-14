@@ -4,6 +4,9 @@
     overflow: hidden;
     border-size:2px;
     border-color:var(--github-accent);
+    transition: height 0.5s ease-in-out; /* Hinzufügen der Transition */
+    height: 50px; /* Höhe im normalen Zustand */
+
 }
 
 /* Style the links inside the navigation bar */
@@ -55,5 +58,8 @@
         float: none;
         display: block;
         text-align: left;
+    }
+    .topnav.responsive {
+        height: 200px; /* Höhe im "responsive" Zustand */
     }
 }

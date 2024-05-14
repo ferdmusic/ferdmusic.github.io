@@ -1,4 +1,4 @@
-function myFunction() {
+function aufklappen() {
     var x = document.getElementById("myTopnav");
     if (x.classList.contains("responsive")) {
         x.classList.remove("responsive");
