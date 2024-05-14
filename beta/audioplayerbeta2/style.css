@@ -10,6 +10,23 @@
   --border-radius: 1rem;
 }
 
+/* Styles for screens larger than 600px */
+@media screen and (min-width: 600px) {
+  .audio-player {
+    /* Styles for larger screens here */
+    width: 80%;
+    margin: auto;
+  }
+}
+
+/* Styles for screens smaller or equal to 600px */
+@media screen and (max-width: 600px) {
+  .audio-player {
+    /* Styles for smaller screens here */
+    width: 100%;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
