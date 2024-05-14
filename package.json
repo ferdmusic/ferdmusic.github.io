@@ -1,0 +1,17 @@
+{
+  "name": "ferdmusic.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ferdmusic/ferdmusic.github.io.git"
+  },
+  "private": true,
+  "devDependencies": {
+    "wavesurfer.js": "^7.7.14"
+  }
+}
