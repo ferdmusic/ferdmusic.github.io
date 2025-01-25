@@ -3,104 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>0z - Saro Create V2</title>
+    <title>0z | Saro Create V2</title>
 
     <!-- CDN Einbindungen -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .code-gradient {
+            background: linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .animate-gradient {
+            animation: gradientShift 8s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        .nav-scroll {
+            transform: scale(0.98);
+            opacity: 0.95;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card {
+            view-timeline: --card block;
+            animation: cardEntrance 1s ease both;
+            animation-timeline: --card;
+            animation-range: entry 20% cover 30%;
+        }
+
+        .hero-title, .hero-subtitle, .hero-cta {
+            opacity: 0;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-subtitle { animation-delay: 0.2s; }
+        .hero-cta { animation-delay: 0.4s; }
+    </style>
 </head>
-<body class="font-['Inter'] bg-neutral-50">
+<body class="font-['Inter'] bg-[#0F172A] text-gray-300">
     <!-- Navigation -->
-    <nav class="sticky top-0 bg-white/80 backdrop-blur-sm border-b z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4">
+    <nav class="sticky top-0 bg-[#1E293B]/90 backdrop-blur-sm border-b border-[#334155] z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-2">
-                    <span class="text-2xl font-bold text-emerald-600">0z</span>
-                    <span class="text-sm text-neutral-600">Saro Create V2</span>
+                <div class="flex items-center space-x-3">
+                    <span class="font-['JetBrains_Mono'] text-2xl font-bold code-gradient">0z::SaroV2</span>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#" class="text-neutral-600 hover:text-emerald-600 transition">Home</a>
-                    <a href="#" class="text-neutral-600 hover:text-emerald-600 transition">Features</a>
-                    <a href="#" class="text-neutral-600 hover:text-emerald-600 transition">Gallery</a>
-                    <a href="#" class="text-neutral-600 hover:text-emerald-600 transition">Kontakt</a>
+                <div class="hidden md:flex space-x-8 font-['JetBrains_Mono']">
+                    <a href="#" class="hover:text-cyan-400 transition-all">Start</a>
+                    <a href="#services" class="hover:text-cyan-400 transition-all">Leistungen</a>
+                    <a href="#kontakt" class="hover:text-cyan-400 transition-all">Kontakt</a>
                 </div>
+                <button class="md:hidden text-cyan-400" id="mobile-menu-button">
+                    <span class="material-icons">menu</span>
+                </button>
             </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <a href="#" class="block py-2 px-4 text-sm hover:bg-[#1E293B]">Start</a>
+            <a href="#services" class="block py-2 px-4 text-sm hover:bg-[#1E293B]">Leistungen</a>
+            <a href="#kontakt" class="block py-2 px-4 text-sm hover:bg-[#1E293B]">Kontakt</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative h-[80vh] flex items-center">
+    <section class="relative min-h-[90vh] flex items-center">
         <div class="max-w-6xl mx-auto px-4 text-center">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-emerald-600 to-cyan-500 bg-clip-text text-transparent">
-                Revolution im Mining
+            <h1 class="hero-title text-5xl md:text-7xl font-bold mb-6 code-gradient font-['JetBrains_Mono'] animate-gradient">
+                Maßgeschneiderte<br>Turtle-Programmierung
             </h1>
-            <p class="text-xl text-neutral-600 max-w-2xl mx-auto mb-8">
-                Automatisierte Turtle-Programmierung für Minecraft mit CC:Tweaked.
-                Maximale Effizienz durch maßgeschneiderte Algorithmen.
+            <p class="hero-subtitle text-xl text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+                Individuelle Lösungen für komplexe Minecraft-Automatisierungen.<br>
+                CC:Tweaked-Experten für einmalige Projekte und Spezialanfertigungen.
             </p>
-            <button class="bg-emerald-600 text-white px-8 py-4 rounded-full text-lg hover:bg-emerald-700 transition-all">
-                Jetzt Anfragen
-                <span class="material-icons align-middle ml-2">arrow_forward</span>
-            </button>
+            <a href="#kontakt" class="hero-cta inline-block font-['JetBrains_Mono'] bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-8 py-4 rounded-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all">
+                Angebot anfordern
+            </a>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="p-6 hover:bg-neutral-50 rounded-xl transition">
-                <span class="material-icons text-4xl text-emerald-600 mb-4">code</span>
-                <h3 class="text-xl font-semibold mb-2">Custom Scripts</h3>
-                <p class="text-neutral-600">Individuell angepasste Programme für jede Mining-Situation</p>
-            </div>
-
-            <div class="p-6 hover:bg-neutral-50 rounded-xl transition">
-                <span class="material-icons text-4xl text-emerald-600 mb-4">settings</span>
-                <h3 class="text-xl font-semibold mb-2">Smart Automation</h3>
-                <p class="text-neutral-600">Vollautomatisierte Ressourcenverwaltung und Logistik</p>
-            </div>
-
-            <div class="p-6 hover:bg-neutral-50 rounded-xl transition">
-                <span class="material-icons text-4xl text-emerald-600 mb-4">bolt</span>
-                <h3 class="text-xl font-semibold mb-2">Höchste Effizienz</h3>
-                <p class="text-neutral-600">Optimierte Pfadalgorithmen für maximale Ausbeute</p>
-            </div>
-
-            <div class="p-6 hover:bg-neutral-50 rounded-xl transition">
-                <span class="material-icons text-4xl text-emerald-600 mb-4">support</span>
-                <h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
-                <p class="text-neutral-600">Persönliche Betreuung bei allen Herausforderungen</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="py-20">
+    <!-- Services -->
+    <section id="services" class="py-20 border-t border-[#334155]">
         <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Aus der Praxis</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="aspect-square bg-neutral-100 rounded-2xl hover:scale-[1.02] transition">
-                    <!-- Bildplaceholder -->
+            <h2 class="text-3xl font-bold text-center mb-12 code-gradient font-['JetBrains_Mono'] animate-gradient">Unsere Leistungen</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Hauptdienstleistung -->
+                <div class="service-card p-8 bg-[#1E293B] rounded-xl border border-[#334155] hover:border-cyan-400/30 transition-all hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-cyan-500/10 delay-100">
+                    <div class="mb-4 flex items-center space-x-3">
+                        <span class="material-icons text-cyan-400">code</span>
+                        <h3 class="text-xl">Individuelle Turtle-Programme</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Einmalige Entwicklung maßgeschneiderter Lösungen:
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="text-cyan-400">✔ Komplexe Logistiknetzwerke</li>
+                        <li class="text-cyan-400">✔ Sonderanfertigungen nach Plan</li>
+                        <li class="text-cyan-400">✔ Notfall-Debugging Service</li>
+                    </ul>
                 </div>
-                <div class="aspect-square bg-neutral-100 rounded-2xl hover:scale-[1.02] transition">
-                    <!-- Bildplaceholder -->
+
+                <!-- Zusatzleistungen -->
+                <div class="service-card p-8 bg-[#1E293B] rounded-xl border border-[#334155] hover:border-cyan-400/30 transition-all hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-cyan-500/10 delay-100">
+                    <div class="mb-4 flex items-center space-x-3">
+                        <span class="material-icons text-cyan-400">settings</span>
+                        <h3 class="text-xl">Erweiterte Services</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Optionales Zubehör und Anpassungen:
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="text-cyan-400">✔ Systemwartung</li>
+                        <li class="text-cyan-400">✔ Performance-Optimierung</li>
+                        <li class="text-cyan-400">✔ Schulungen und Support</li>
+                    </ul>
                 </div>
-                <div class="aspect-square bg-neutral-100 rounded-2xl hover:scale-[1.02] transition">
-                    <!-- Bildplaceholder -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="kontakt" class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="max-w-3xl mx-auto bg-[#1E293B] rounded-2xl p-8 border border-[#334155] hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500">
+                <h2 class="text-3xl font-bold mb-8 code-gradient font-['JetBrains_Mono'] text-center">Kontaktaufnahme</h2>
+
+                <div class="space-y-6">
+                    <div class="contact-card p-6 bg-[#0F172A] rounded-lg border border-[#334155] transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-lg hover:shadow-cyan-500/5">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="material-icons text-cyan-400">mail</span>
+                            <h3 class="font-['JetBrains_Mono']">Direktnachricht</h3>
+                        </div>
+                        <p class="text-gray-400">
+                            Kontaktieren Sie uns im Spiel bei:<br>
+                            <span class="text-cyan-400">Ferdmusic</span> oder
+                            <span class="text-cyan-400">KoenigOzelot</span>
+                        </p>
+                    </div>
+
+                    <div class="contact-card p-6 bg-[#0F172A] rounded-lg border border-[#334155] transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-lg hover:shadow-cyan-500/5">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="material-icons text-cyan-400">map</span>
+                            <h3 class="font-['JetBrains_Mono']">Unser Hauptquartier</h3>
+                        </div>
+                        <p class="text-gray-400">
+                            Koordinaten: <span class="text-cyan-400">X=-125, Y=96, Z=-725</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-neutral-900 text-neutral-400">
-        <div class="max-w-6xl mx-auto px-4 py-12">
-            <div class="text-center">
-                <p class="mb-4">0z GmbH · Experten für CC:Tweaked Programmierung</p>
-                <p class="text-sm">© 2023 Saro Create V2. Alle Rechte vorbehalten.</p>
+    <footer class="border-t border-[#334155]">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <div class="text-center text-gray-500 text-sm">
+                <div class="font-['JetBrains_Mono'] mb-2">
+                    <span class="code-gradient">0z::SaroCreateV2</span>
+                </div>
+                <p>© 2023 0z | CC:Tweaked Spezialisten</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Navigation Scroll-Effekt
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-scroll');
+            } else {
+                nav.classList.remove('nav-scroll');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Scroll-ausgelöste Animationen
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.service-card, .contact-card').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Smooth Scrolling für Anker-Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
