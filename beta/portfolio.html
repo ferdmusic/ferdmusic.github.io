@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferdmusic - Portfolio</title>
+    <style>
+        :root {
+            --standard-margin: 1rem;
+            --standard-padding: 1rem;
+            --standard-border-radius: 0.25rem;
+            --standard-font-size: 1rem;
+            --standard-line-height: 1.5;
+            --flex-direction-landing: row;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --github-background: #0d1117;
+                --github-text: #c9d1d9;
+                --github-border: #30363d;
+                --github-link: #58a6ff;
+                --github-accent: #58a6ff;
+                --github-button-text: #ffffff;
+                --github-background-dark: #0a0e13;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --github-background: #ffffff;
+                --github-text: #24292e;
+                --github-border: #e1e4e8;
+                --github-link: #0366d6;
+                --github-accent: #0366d6;
+                --github-button-text: #ffffff;
+                --github-background-dark: #d3d3d3;
+            }
+        }
+
+        @media (max-width: 1500px) {
+            :root {
+                --standard-margin: 0.5rem;
+                --standard-padding: 0.5rem;
+                --standard-border-radius: 0.125rem;
+                --standard-font-size: 0.875rem;
+                --standard-line-height: 1.25;
+                --flex-direction-landing: column;
+            }
+            .landing-img {
+                display: none;
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 1200px) {
+            :root {
+                --standard-margin: 0.75rem;
+                --standard-padding: 0.75rem;
+                --standard-border-radius: 0.1875rem;
+                --standard-font-size: 0.9375rem;
+                --standard-line-height: 1.375;
+            }
+        }
+
+        @media (min-width: 1201px) {
+            :root {
+                --standard-margin: 1rem;
+                --standard-padding: 1rem;
+                --standard-border-radius: 0.25rem;
+                --standard-font-size: 1rem;
+                --standard-line-height: 1.5;
+            }
+        }
+
+        body {
+            margin: var(--standard-margin);
+            padding: var(--standard-padding);
+            font-family: Arial, sans-serif;
+            background-color: var(--github-background, #ffffff);
+            color: var(--github-text, #24292e);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: var(--standard-margin);
+            padding: var(--standard-padding);
+            border: 1px solid var(--github-border, #e1e4e8);
+            border-radius: var(--standard-border-radius);
+            max-width: 1200px;
+            background-color: var(--github-background-dark, #d3d3d3);
+        }
+
+        h1, h2, h3 {
+            color: var(--github-text, #24292e);
+        }
+
+        a {
+            color: var(--github-link, #0366d6);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: var(--standard-margin);
+            padding: var(--standard-padding);
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: var(--flex-direction-landing);
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .flex-item {
+            flex: 1;
+            margin: var(--standard-margin);
+            padding: var(--standard-padding);
+            border: 1px solid var(--github-border, #e1e4e8);
+            border-radius: var(--standard-border-radius);
+            background-color: var(--github-background, #ffffff);
+        }
+
+        @media (max-width: 600px) {
+            .flex-container {
+                flex-direction: column;
+            }
+            .flex-item {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Ferdmusic - Portfolio</h1>
+
+    <div class="section">
+        <h2>Überblick</h2>
+        <p>Ferdmusic ist ein aufstrebender Musiker und Komponist, der sich auf Filmmusik und Postproduktion spezialisiert hat. Hier sind einige Highlights aus seinem Portfolio:</p>
+    </div>
+
+    <div class="section">
+        <h3>YouTube-Kanal: <a href="https://www.youtube.com/channel/UCFerdmusic" target="_blank">Ferdmusic</a></h3>
+        <div class="flex-container">
+            <div class="flex-item">
+                <p>Ferdmusic betreibt einen YouTube-Kanal mit 41 Abonnenten. Dort teilt er seine Musik und kreative Projekte.</p>
+            </div>
+            <div class="flex-item">
+                <p>Sein Beitrag zum Indie Film Music Contest: "Unabducted" wurde auf seinem Kanal veröffentlicht.</p>
+            </div>
+            <div class="flex-item">
+                <p>Weitere Videos, darunter "Musio SoundOff Winner - The Adventure of the Ferds" und "Adventure Time - Ferdmusic Hollywood Orchestra", sind ebenfalls verfügbar.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Musikproduktion</h3>
+        <p>Ferdmusic verwendet seit ein paar Wochen Nuendo, nachdem er zuvor Cubase genutzt hat. Er hat beim Indie Film Music Contest teilgenommen und seine Musik für verschiedene Filmprojekte komponiert. Seine Musik ist vielseitig und reicht von orchestralen Stücken bis hin zu elektronischen Klängen.</p>
+    </div>
+
+    <div class="section">
+        <h3>Video- und Audiobearbeitung</h3>
+        <p>Ferdmusic ist mit DaVinci Resolve vertraut und hat bereits mit Premiere gearbeitet. Seine Fähigkeiten in der Postproduktion ermöglichen es ihm, sowohl visuelle als auch klangliche Elemente zu gestalten.</p>
+    </div>
+
+    <div class="section">
+        <h3>Geburtsdatum</h3>
+        <p>Ferdmusic wurde am 27.04.2020 geboren.</p>
+    </div>
+
+    <div class="section">
+        <h3>Zukünftige Projekte</h3>
+        <p>Obwohl er bisher noch kein großes Postproduktionsprojekt gestartet hat, interessiert sich Ferdmusic dafür und möchte in Zukunft mehr Erfahrungen sammeln.</p>
+    </div>
+
+    <div class="section">
+        <h3>Weitere Informationen</h3>
+        <p>Ferdmusic hat auch einen <a href="https://ferdmusic.bandcamp.com/" target="_blank">Bandcamp-Account</a>, auf dem er seine Musik veröffentlicht. Sein <a href="https://github.com/ferdmusic/" target="_blank">GitHub-Profil</a> zeigt möglicherweise weitere Projekte oder musikbezogene Aktivitäten.</p>
+    </div>
+</div>
+</body>
+</html>
